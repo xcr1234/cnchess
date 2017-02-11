@@ -1,0 +1,80 @@
+JFDML JFormDesigner: "5.2.5.1.342" Java: "1.8.0_112" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
+			name: "this"
+			"resizable": false
+			"title": "中国象棋"
+			"defaultCloseOperation": 0
+			"$locationPolicy": 1
+			addEvent( new FormEvent( "java.awt.event.WindowListener", "windowClosing", "thisWindowClosing", true ) )
+			add( new FormComponent( "edu.hubu.cnxq.ChessPanel" ) {
+				name: "panel"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 0
+				"y": 0
+				"width": 558
+				"height": 620
+			} )
+			menuBar: new FormContainer( "javax.swing.JMenuBar", new FormLayoutManager( class javax.swing.JMenuBar ) ) {
+				name: "menuBar1"
+				add( new FormContainer( "javax.swing.JMenu", new FormLayoutManager( class javax.swing.JMenu ) ) {
+					name: "menu1"
+					"text": "游戏"
+					add( new FormComponent( "javax.swing.JMenuItem" ) {
+						name: "menuItem1"
+						"text": "重新开局（先手）"
+						"accelerator": static javax.swing.KeyStroke getKeyStroke( 78, 130, false )
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "menuGameStartFirst", true ) )
+					} )
+					add( new FormComponent( "javax.swing.JMenuItem" ) {
+						name: "menuItem4"
+						"text": "重新开局（后手）"
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "menuGameStartLast", true ) )
+					} )
+					add( new FormComponent( "javax.swing.JMenuItem" ) {
+						name: "menuItem7"
+						"text": "悔棋"
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "menuBackChess", true ) )
+					} )
+					add( new FormComponent( "javax.swing.JMenuItem" ) {
+						name: "menuItem2"
+						"text": "退出"
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "menuConfirmExit", true ) )
+					} )
+					add( new FormComponent( "javax.swing.JPopupMenu$Separator" ) {
+						name: "separator1"
+					} )
+				} )
+				add( new FormContainer( "javax.swing.JMenu", new FormLayoutManager( class javax.swing.JMenu ) ) {
+					name: "menu3"
+					"text": "棋谱"
+					add( new FormComponent( "javax.swing.JMenuItem" ) {
+						name: "menuItem5"
+						"text": "保存棋局"
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "menuGameSave", true ) )
+					} )
+					add( new FormComponent( "javax.swing.JMenuItem" ) {
+						name: "menuItem6"
+						"text": "加载棋局"
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "menuGameLoad", true ) )
+					} )
+				} )
+				add( new FormContainer( "javax.swing.JMenu", new FormLayoutManager( class javax.swing.JMenu ) ) {
+					name: "menu2"
+					"text": "关于"
+					add( new FormComponent( "javax.swing.JMenuItem" ) {
+						name: "menuItem3"
+						"text": "获取源代码"
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "menuAboutGithub", true ) )
+					} )
+				} )
+			}
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 575, 680 )
+		} )
+	}
+}
