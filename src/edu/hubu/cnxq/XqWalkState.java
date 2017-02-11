@@ -98,8 +98,8 @@ public class XqWalkState implements WalkState, Constants {
         List<Move> move = walker.getAllMove(red, x, y);
         List<Move> moveList = new ArrayList<>();
         for (Move m : move) {
-            int s = chessBoard.getState(m.getTo().getX(),m.getTo().getY());
-            if (chessBoard.inBoard(m.getFrom().getX(), m.getFrom().getY()) && chessBoard.inBoard(m.getTo().getX(), m.getTo().getY()) && !isSelfState(s,red)) {
+            int s = chessBoard.getState(m.getTo().getX(), m.getTo().getY());
+            if (chessBoard.inBoard(m.getFrom().getX(), m.getFrom().getY()) && chessBoard.inBoard(m.getTo().getX(), m.getTo().getY()) && !isSelfState(s, red)) {
                 moveList.add(m);
             }
         }
@@ -140,7 +140,7 @@ public class XqWalkState implements WalkState, Constants {
         int selfX = red ? chessBoard.getShuai().getX() : chessBoard.getJiang().getX(); //自己这边的将/帅坐标
         int selfY = red ? chessBoard.getShuai().getY() : chessBoard.getJiang().getY();
         int enemyX = red ? chessBoard.getJiang().getX() : chessBoard.getShuai().getX(); //对方的将/帅坐标
-        int enemyY = red ? chessBoard.getJiang().getY(): chessBoard.getShuai().getY();
+        int enemyY = red ? chessBoard.getJiang().getY() : chessBoard.getShuai().getY();
         if (isJiangJun(red, selfX, selfY)) { //先要判断自己是否被将军.
             //走了一步，自己被将军了，那不就输了?
             return red ? WinEnum.RED : WinEnum.BLACK;
@@ -171,6 +171,18 @@ public class XqWalkState implements WalkState, Constants {
             } else {
                 return red ? WinEnum.BLACK : WinEnum.RED;
             }
+        }
+        //如果所有人只剩下象士帅，则和棋
+        boolean draw = true;
+        for (ChessBoardItem chessBoardItem : chessBoard) {
+            int state = chessBoardItem.getState();
+            if (state != EMPTY && state != redXiang && state != blackXiang && state != redShi && state != blackShi && state != blackJiang && state != redJiang) {
+                draw = false;
+                break;
+            }
+        }
+        if (draw) {
+            return WinEnum.DRAW;
         }
         return WinEnum.NO;
     }
