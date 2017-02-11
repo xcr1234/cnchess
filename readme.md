@@ -2,7 +2,7 @@
 
 支持人人双方对战 人机对战的功能正在实现中  
 
-下载[jar包](out/artifacts/xq_jar/xq.jar)玩耍  
+下载[jar包](xq.jar)玩耍  
 
 ![图片](res/无标题.png)
 
