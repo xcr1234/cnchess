@@ -294,7 +294,7 @@ public class ChessPanel extends JPanel implements Constants {
         red = gameSave.isRed();
         playing = gameSave.isPlaying();
         selectPoint = null;
-        walkState = new XqWalkState(chessBoard);
+        walkState.setChessBoard(chessBoard);
         repaintBoard();
     }
 

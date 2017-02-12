@@ -35,6 +35,9 @@ public class XqWalkState implements WalkState, Constants {
         return chessBoard;
     }
 
+    public void setChessBoard(XqChessBoard chessBoard) {
+        this.chessBoard = chessBoard;
+    }
 
     @Override
     public boolean canMove(boolean red, Move move) {
@@ -223,7 +226,7 @@ public class XqWalkState implements WalkState, Constants {
         }
 
         //假设帅(将)是过河的兵(卒)
-        List<Move> zuMoves = jjZuWalker.getAllMove(red, x, y);
+        List<Move> zuMoves = (red ? jjRedZuWalker : jjBlackZuWalker).getAllMove(red, x, y);
         for (Move zuMove : zuMoves) {
             int state = chessBoard.getState(zuMove.getTo().getX(), zuMove.getTo().getY());
             if (state == (red ? blackZu : redZu)) {
@@ -234,7 +237,8 @@ public class XqWalkState implements WalkState, Constants {
     }
 
     private Walker jjMaWalker = new JiangJunMaWalker(this);
-    private Walker jjZuWalker = new JiangJunZuWalker(this);
+    private Walker jjRedZuWalker = new JiangJunRedZuWalker(this);
+    private Walker jjBlackZuWalker = new JiangJunBlackZuWalker(this);
 
 
     //与马走法对立的走法，也就是判断马能否吃到将/帅
@@ -248,9 +252,9 @@ public class XqWalkState implements WalkState, Constants {
         }
     }
 
-    private static class JiangJunZuWalker extends RedZuWalker {
+    private static class JiangJunRedZuWalker extends RedZuWalker {
 
-        JiangJunZuWalker(WalkState walkState) {
+        JiangJunRedZuWalker(WalkState walkState) {
             setState(walkState);
         }
 
@@ -259,6 +263,18 @@ public class XqWalkState implements WalkState, Constants {
             return true;
         }
     }
+
+    private static class JiangJunBlackZuWalker extends BlackZuWalker{
+        JiangJunBlackZuWalker(WalkState walkState){
+            setState(walkState);
+        }
+
+        @Override
+        public boolean isCrossRiver(int x, int y, boolean red) {
+            return true;
+        }
+    }
+
 
 
 }
